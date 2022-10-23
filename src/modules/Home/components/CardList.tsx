@@ -9,7 +9,7 @@ const CardList = () => {
       <Box mt={4} mb={10} px={{base: 10, lg: 20}}>
         <Flex my={6}>
           <Grid
-            gridAutoFlow="row dense"
+            gridAutoFlow="row"
             gridAutoRows="minmax(min-content, max-content)"
             gridGap="40px 24px"
             gridTemplateColumns="repeat(auto-fill,minmax(250px,1fr))"

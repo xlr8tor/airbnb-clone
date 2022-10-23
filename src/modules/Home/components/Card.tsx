@@ -20,6 +20,8 @@ const Card:FC<ListingsType> = ({host, period, price, location, imageUrl, rating}
           mb={3}
           alt="house"
           borderRadius="xls"
+          objectFit="cover"
+          objectPosition="center"
         />
         <Icon
           as={FaHeart}
