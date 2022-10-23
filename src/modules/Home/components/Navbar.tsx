@@ -14,20 +14,34 @@ type scrollVisibilityApiType = React.ContextType<typeof VisibilityContext>;
 const Navbar = () => {
   const { disableScroll, enableScroll } = usePreventBodyScroll();
   const [isSelected, setIsSelected] = React.useState(1);
+  const [scrollPosition, setScrollPosition] = React.useState(0);
+
+  const handleScroll = () => {
+    const position = window.pageYOffset;
+    setScrollPosition(position);
+  };
 
   const toggleSelected = (id: number) => {
     setIsSelected(id)
   }
 
+  React.useEffect(() => {
+    window.addEventListener("scroll", handleScroll)
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <Box
-      h="98px"
+      h="88px"
       w="100%"
       position="sticky"
       top="calc(80px - 20px)"
       pt={5}
       bgColor="white"
       zIndex={9}
+      boxShadow={scrollPosition >= 10? "0 -1px 6px rgba(0, 0, 0, 0.15)": "none"}
     >
       <Flex>
         <Grid
