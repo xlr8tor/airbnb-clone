@@ -12,7 +12,7 @@ const CardList = () => {
             gridAutoFlow="row"
             gridAutoRows="minmax(min-content, max-content)"
             gridGap="40px 24px"
-            gridTemplateColumns="repeat(auto-fill,minmax(250px,1fr))"
+            gridTemplateColumns={{sm: "repeat(1,minmax(250px,1fr))", md:"repeat(2,minmax(250px,1fr))", lg:"repeat(auto-fill,minmax(250px,1fr))"}}
           >
             {Listings.map((listing) => (
               <Card key={listing.id} {...listing}/>
