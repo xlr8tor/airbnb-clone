@@ -5,7 +5,7 @@ import { FaHeart } from "react-icons/fa";
 import { ListingsType } from "common/data/dummyListingsData";
 
 
-const Card:FC<ListingsType> = ({host, period, price, location, imageUrl}) => {
+const Card:FC<ListingsType> = ({host, period, price, location, imageUrl, rating}) => {
   const [liked, setLiked] = useState(false)
 
   const toggleLike = () => {
@@ -40,7 +40,7 @@ const Card:FC<ListingsType> = ({host, period, price, location, imageUrl}) => {
           <Text fontWeight="boldSm">{location}</Text>
           <HStack>
             <Icon as={StarIcon} />
-            <Text>4.95</Text>
+            <Text>{rating}</Text>
           </HStack>
         </Flex>
         <Text color="gray.50">Hosted by {host}</Text>
