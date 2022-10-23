@@ -1,6 +1,7 @@
 import { Box, Flex, Grid } from "@chakra-ui/react";
 import React from "react";
 import Card from "./Card";
+import { Listings } from "common/data/dummyListingsData";
 
 const CardList = () => {
   return (
@@ -13,12 +14,10 @@ const CardList = () => {
             gridGap="40px 24px"
             gridTemplateColumns="repeat(auto-fill,minmax(250px,1fr))"
           >
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
+            {Listings.map((listing) => (
+              <Card key={listing.id} {...listing}/>
+            ))}
+            
           </Grid>
         </Flex>
       </Box>

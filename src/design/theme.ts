@@ -86,14 +86,20 @@ const shadows = {
   sm: '0 1px 2px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 5%)',
 }
 
+const transitions = {
+  ease: 'opacity 2s ease',
+}
+
 const customTheme = {
   colors,
   borders,
   space,
   fontWeights,
   shadows,
-  radii
+  radii,
+  transitions
 };
+
 
 
 

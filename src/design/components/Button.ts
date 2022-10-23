@@ -57,7 +57,7 @@ const defaultProps = {
       rounded: {
         display: 'inline-block',
         border: '1px',
-        borderColor: 'gray.500',
+        borderColor: 'primary.50',
         borderRadius: 'round',
         minWidth: 'auto',
         minHeight: 'auto',

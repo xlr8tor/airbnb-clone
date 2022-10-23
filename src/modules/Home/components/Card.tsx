@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, FC} from "react";
 import { Box, Flex, HStack, Stack, Text, Icon, Image } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
 import { FaHeart } from "react-icons/fa";
+import { ListingsType } from "common/data/dummyListingsData";
 
-const Card = () => {
+
+const Card:FC<ListingsType> = ({host, period, price, location, imageUrl}) => {
   const [liked, setLiked] = useState(false)
 
   const toggleLike = () => {
@@ -14,7 +16,7 @@ const Card = () => {
     <Box cursor="pointer">
       <Box position="relative">
         <Image
-          src="https://images.unsplash.com/photo-1523217582562-09d0def993a6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2960&q=80"
+          src={`/img/${imageUrl}`}
           mb={3}
           alt="house"
           borderRadius="xls"
@@ -35,16 +37,16 @@ const Card = () => {
 
       <Stack spacing={1} fontSize="14px" lineHeight="19px">
         <Flex justify="space-between">
-          <Text fontWeight="boldSm">Marrakesh, Morocco</Text>
+          <Text fontWeight="boldSm">{location}</Text>
           <HStack>
             <Icon as={StarIcon} />
             <Text>4.95</Text>
           </HStack>
         </Flex>
-        <Text color="gray.50">3,042 kilometers away</Text>
-        <Text color="gray.50">Date</Text>
+        <Text color="gray.50">Hosted by {host}</Text>
+        <Text color="gray.50">{period}</Text>
         <Text fontWeight="boldSm" mt={1.5}>
-          $750 night
+          ${price} night
         </Text>
       </Stack>
     </Box>

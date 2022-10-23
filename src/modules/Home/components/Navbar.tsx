@@ -1,6 +1,7 @@
+import React from "react";
 import { Box, Flex, Grid, Button, Icon, Text } from "@chakra-ui/react";
 import { AiFillControl } from "react-icons/ai";
-import React from "react";
+
 import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
 import { LeftArrow, RightArrow } from "./Arrows";
 import { Card } from "./NavList";
@@ -8,17 +9,15 @@ import usePreventBodyScroll from "./hooks/usePreventBodyScroll";
 import navbar from "common/data/dummyNavData";
 
 type scrollVisibilityApiType = React.ContextType<typeof VisibilityContext>;
-const elemPrefix = "test";
-const getId = (index: number) => `${elemPrefix}${index}`;
 
-const getItems = () =>
-  Array(20)
-    .fill(0)
-    .map((_, ind) => ({ id: getId(ind) }));
 
 const Navbar = () => {
-  const [items] = React.useState(getItems);
   const { disableScroll, enableScroll } = usePreventBodyScroll();
+  const [isSelected, setIsSelected] = React.useState(1);
+
+  const toggleSelected = (id: number) => {
+    setIsSelected(id)
+  }
 
   return (
     <Box
@@ -60,6 +59,10 @@ const Navbar = () => {
                   msOverflowStyle: "none",
                   gap: "24px",
                 },
+                ".react-horizontal-scrolling-menu--arrow-left,.react-horizontal-scrolling-menu--arrow-right":
+                  {
+                    alignItems: "center",
+                  },
               }}
             >
               <ScrollMenu
@@ -68,8 +71,11 @@ const Navbar = () => {
                 onWheel={onWheel}
               >
                 {navbar.map(({ id, title, component }) => (
+                
+                  
                   <Box key={id} mt={3} pt={1} pb={3.5}>
-                    <Button variant="blank" px={0}>
+                    
+                    <Button variant="blank" px={0} onClick={() => toggleSelected(id)} >
                       <Box display="flex">
                         <Box
                           as="span"
@@ -77,21 +83,29 @@ const Navbar = () => {
                           flexDirection="column"
                           gap={2}
                           alignItems="center"
+                          _after={{
+                            position: "absolute",
+                            content: "' '",
+                            height: "2px",
+                            top: "calc(100% + 12px)",
+                            opacity: id == isSelected ? 1 : 0,
+                            transition: "opacity 0.3s ease",
+                            insetInline: 0,
+                            bgColor: id == isSelected ? "black": "gray.25",
+                          }}
+                          _hover={{
+                            _after: {
+                              opacity: 1,
+                            },
+                          }}
                         >
                           <Icon as={component} />
                           <Text
                             fontSize="12px"
                             color="gray.50"
                             fontWeight="boldSm"
-                           _after={{
-                            position: "absolute",
-                            content: "' '",
-                            height: "2px",
-                            top: "calc(100% + 12px)",
-                            opacity: "1",
-                            insetInline: 0
-                           }}
                           >
+                    
                             {title}
                           </Text>
                         </Box>
@@ -99,13 +113,6 @@ const Navbar = () => {
                     </Button>
                   </Box>
                 ))}
-                {/* {items.map(({ id }) => (
-              <Card
-                title={id}
-                itemId={id} // NOTE: itemId is required for track items
-                key={id}
-              />
-            ))} */}
               </ScrollMenu>
             </Box>
             <Box flexBasis="fit-content">

@@ -1,6 +1,7 @@
 import React from "react";
-
 import { VisibilityContext } from "react-horizontal-scrolling-menu";
+import {Button, Icon} from "@chakra-ui/react"
+import {FaAngleRight, FaAngleLeft} from "react-icons/fa"
 
 function Arrow({
   children,
@@ -12,21 +13,26 @@ function Arrow({
   onClick: VoidFunction;
 }) {
   return (
-    <button
+    <Button
+      variant="outline"
       disabled={disabled}
       onClick={onClick}
-      style={{
-        cursor: "pointer",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        right: "1%",
-        opacity: disabled ? "0" : "1",
-        userSelect: "none"
-      }}
+      cursor="pointer"
+      display= "flex"
+      flexDirection= "column"
+      justifyContent= "center"
+      right="1%"
+      opacity={ disabled? 0 : 1}
+      userSelect="none"
+      _disabled={{opacity: 0}}
+      borderRadius="round"
+      padding="0"
+      w="28px"
+      minW="none"
+      h="28px"
     >
       {children}
-    </button>
+    </Button>
   );
 }
 
@@ -50,7 +56,7 @@ export function LeftArrow() {
 
   return (
     <Arrow disabled={disabled} onClick={() => scrollPrev()}>
-      Left
+      <Icon as={FaAngleLeft}/>
     </Arrow>
   );
 }
@@ -74,7 +80,7 @@ export function RightArrow() {
 
   return (
     <Arrow disabled={disabled} onClick={() => scrollNext()}>
-      Right
+     <Icon as={FaAngleRight}/>
     </Arrow>
   );
 }
